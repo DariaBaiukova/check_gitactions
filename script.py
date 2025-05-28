@@ -11,16 +11,17 @@ import urllib3
 urllib3.disable_warnings()
 
 headers = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) '
+        'Gecko/20100101 Firefox/45.0'
       }
 
 base_url = "https://tekstpesni.ru"
 artist = ["kaleo"]
 
-carl_url= []
+carl_url = []
 for i in artist:
-    url = f"{base_url}/search?q={i}" 
-    response = requests.get(url, headers =headers, verify=False)
+    url = f"{base_url}/search?q={i}"
+    response = requests.get(url, headers=headers, verify=False)
     soup = BeautifulSoup(response.text, 'html.parser')
     data = soup.find_all(
         'a',
@@ -56,7 +57,11 @@ for i_url in carl_url:
         print("Название песни:", song_title)
 
         lyrics = soup.find('meta', itemprop="description")
-        lyrics = str(lyrics).replace('<meta content=', '').replace('itemprop="description"/>', '')
+        lyrics = (
+            str(lyrics)
+            .replace('<meta content=', '')
+            .replace('itemprop="description"/>', '')
+            )
         print(lyrics)
         results_3 = soup.find('img', class_="rounded border").get("src")
         url_img = f"{base_url}{results_3}"
