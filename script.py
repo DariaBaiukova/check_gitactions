@@ -26,9 +26,9 @@ for i in artist:
     data = soup.find_all(
         'a',
         class_="link-primary link-offset-1 link-offset-1-hover "
-                "link-underline link-underline-opacity-0 "
-                "link-underline-opacity-75-hover"
-                )
+        "link-underline link-underline-opacity-0 "
+        "link-underline-opacity-75-hover"
+        )
     for i in data:
         song_url = i.get("href")
         carl_url.append(f"{base_url}{song_url}")
